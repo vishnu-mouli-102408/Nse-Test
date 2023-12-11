@@ -1,5 +1,12 @@
+import express from "express";
+import bodyParser from "body-parser";
 import { NseIndia } from "stock-nse-india";
 const nseIndia = new NseIndia();
+
+const app = express()
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
 
 // export const currentMarketPrice = await nseIndia
 //   .getEquityDetails("SBIN")
@@ -44,5 +51,16 @@ export async function fetchCurrentMarketPrice(symbol) {
   }
 }
 
-const res = await fetchCurrentMarketPrice("SBIN");
-console.log(res)
+const resp = await fetchCurrentMarketPrice("SBIN");
+
+app.get("/",(req,res)=>{
+	res.send(resp)
+})
+
+app.listen(3000,()=>{
+	console.log("Server started on port 3000")
+})
+
+
+
+
