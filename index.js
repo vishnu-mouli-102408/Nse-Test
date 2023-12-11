@@ -54,7 +54,7 @@ export async function fetchCurrentMarketPrice(symbol) {
 const resp = await fetchCurrentMarketPrice("SBIN");
 
 app.get("/",(req,res)=>{
-	res.send(resp)
+	res.send("RESPONSE",resp)
 })
 
 app.listen(3000,()=>{
